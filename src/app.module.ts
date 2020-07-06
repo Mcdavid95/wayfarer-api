@@ -2,7 +2,10 @@ import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { User } from './models/user';
+import { UsersModule } from './modules/user.module';
+import { BusesModule } from './modules/bus.module';
+import { BookingsModule } from './modules/booking.module';
+import { TripsModule } from './modules/trip.module';
 
 @Module({
   imports: [
@@ -14,8 +17,11 @@ import { User } from './models/user';
       database: 'db',
       autoLoadModels: true,
       synchronize: true,
-      models: [User],
     }),
+    UsersModule,
+    BusesModule,
+    TripsModule,
+    BookingsModule
   ],
   controllers: [AppController],
   providers: [AppService],

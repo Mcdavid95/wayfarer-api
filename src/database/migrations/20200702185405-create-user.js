@@ -1,10 +1,5 @@
-import {
-    QueryInterface,
-    SequelizeStatic
-} from 'sequelize';
-
-export = {
-    up: (queryInterface: QueryInterface, Sequelize: SequelizeStatic) => {
+module.exports = {
+    up: async (queryInterface, Sequelize) => {
         return queryInterface.createTable('Users', {
             id: {
                 allowNull: false,
@@ -29,19 +24,21 @@ export = {
                 type: Sequelize.STRING
             },
 
-            createdAt: {
+            created_at: {
                 allowNull: false,
-                type: Sequelize.DATE
+                type: Sequelize.DATE,
+                defaultValue: Sequelize.fn('NOW')
             },
 
-            updatedAt: {
+            updated_at: {
                 allowNull: false,
-                type: Sequelize.DATE
+                type: Sequelize.DATE,
+                defaultValue: Sequelize.fn('NOW')
             }
         });
     },
 
-    down: (queryInterface: QueryInterface, Sequelize: SequelizeStatic) => {
+    down: (queryInterface, Sequelize) => {
         return queryInterface.dropTable('Users');
     }
 };

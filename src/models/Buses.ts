@@ -1,12 +1,12 @@
 import { Column, Model, Table, HasMany } from 'sequelize-typescript';
-import { Trip } from './trip';
+import { Trips } from './Trips';
 
 @Table({
     timestamps: true,
     createdAt: 'created_at',
     updatedAt: 'updated_at'
 })
-export class Bus extends Model<Bus> {
+export class Buses extends Model<Buses> {
     @Column
     number_plate: string;
 
@@ -22,6 +22,6 @@ export class Bus extends Model<Bus> {
     @Column
     capacity: number;
 
-    @HasMany(() => Trip)
-    trips: Trip[];
+    @HasMany(() => Trips)
+    trips: Trips[];
 }

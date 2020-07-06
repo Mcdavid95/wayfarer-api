@@ -1,9 +1,9 @@
 
 import { Column, Model, Table, IsEmail, HasMany } from 'sequelize-typescript';
-import { Booking } from './booking';
+import { Bookings } from './Bookings';
 
 @Table
-export class User extends Model<User> {
+export class Users extends Model<Users> {
     @Column
     first_name: string;
 
@@ -20,6 +20,6 @@ export class User extends Model<User> {
     @Column({ defaultValue: false })
     isAdmin: boolean;
 
-    @HasMany(() => Booking)
-    trips: Booking[];
+    @HasMany(() => Bookings)
+    trips: Bookings[];
 };

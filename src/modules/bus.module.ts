@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { Bus } from '../models/bus';
+import { Buses } from '../models/Buses';
 
 @Module({
-  imports: [SequelizeModule.forFeature([Bus])],
+  imports: [SequelizeModule.forFeature([Buses])],
   exports: [SequelizeModule]
 })
 export class BusesModule {}
