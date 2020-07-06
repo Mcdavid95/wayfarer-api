@@ -1,8 +1,7 @@
 import { Injectable } from '@nestjs/common';
+import { Sequelize } from 'sequelize-typescript';
 
 @Injectable()
 export class AppService {
-  getHello(): string {
-    return 'Welcome to WayFarer API!';
-  }
+  constructor(private sequelize: Sequelize) {}
 }
