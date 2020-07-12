@@ -8,15 +8,25 @@ module.exports = {
                 type: Sequelize.INTEGER
             },
 
-            firstname: {
+            first_name: {
                 type: Sequelize.STRING
             },
 
-            lastname: {
+            last_name: {
                 type: Sequelize.STRING
             },
 
             phone: {
+                type: Sequelize.STRING
+            },
+
+            is_admin: {
+                type: Sequelize.BOOLEAN,
+                defaultValue: false
+            },
+
+
+            password: {
                 type: Sequelize.STRING
             },
 

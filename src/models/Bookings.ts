@@ -1,4 +1,4 @@
-import { Column, Model, Table, DataType, ForeignKey } from 'sequelize-typescript';
+import { Column, Model, Table, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
 import { Trips } from './Trips';
 import { Users } from './Users';
 
@@ -18,4 +18,7 @@ export class Bookings extends Model<Bookings> {
     @ForeignKey(() => Users)
     @Column(DataType.INTEGER)
     user_id: number;
+
+    @BelongsTo(() => Users)
+    user: Users;
 }
