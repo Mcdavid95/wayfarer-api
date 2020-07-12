@@ -1,8 +1,11 @@
 
-import { Column, Model, Table, IsEmail, HasMany } from 'sequelize-typescript';
+import { Column, Model, Table, IsEmail, HasMany, Unique } from 'sequelize-typescript';
 import { Bookings } from './Bookings';
-
-@Table
+@Table({
+    timestamps: true,
+    createdAt: 'created_at',
+    updatedAt: 'updated_at'
+})
 export class Users extends Model<Users> {
     @Column
     first_name: string;
@@ -10,7 +13,11 @@ export class Users extends Model<Users> {
     @Column
     last_name: string;
 
+    @Column
+    phone: string;
+
     @IsEmail
+    @Unique
     @Column
     email: string;
 
@@ -18,7 +25,7 @@ export class Users extends Model<Users> {
     password: string;
     
     @Column({ defaultValue: false })
-    isAdmin: boolean;
+    is_admin: boolean;
 
     @HasMany(() => Bookings)
     trips: Bookings[];
