@@ -1,5 +1,5 @@
-import { GetUser } from "src/dtos/users.dto";
-import { JwtObject } from "./auth.interface";
+import { JwtObject, GetUser } from "./auth.interface";
+import { GetBus } from "./bus.interface";
 
 export interface UserResponse {
   success: boolean,
@@ -14,4 +14,9 @@ export interface ErrorResponse {
 export interface LoginResponse {
   success: boolean,
   data: JwtObject
+}
+
+export interface BusResponse {
+  success: boolean,
+  data: GetBus
 }
