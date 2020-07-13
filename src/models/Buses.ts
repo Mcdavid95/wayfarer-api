@@ -7,8 +7,8 @@ import { Trips } from './Trips';
     updatedAt: 'updated_at'
 })
 export class Buses extends Model<Buses> {
-    @Column
     @Unique
+    @Column
     number_plate: string;
 
     @Column
