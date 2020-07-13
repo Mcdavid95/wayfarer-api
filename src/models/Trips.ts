@@ -1,6 +1,7 @@
 import { Column, Model, Table, DataType, ForeignKey, HasMany } from 'sequelize-typescript';
 import { Buses } from './Buses';
 import { Bookings } from './Bookings';
+import { Seats } from 'src/interfaces/trip.interface';
 
 @Table({
     timestamps: true,
@@ -27,8 +28,8 @@ export class Trips extends Model<Trips> {
     @Column
     fare: number;
 
-    @Column(DataType.JSONB)
-    seats: string; // actually a jsonb column
+    @Column(DataType.ARRAY(DataType.JSONB))
+    seats: Seats[]; // actually a jsonb column
 
     @HasMany(() => Bookings)
     tickets: Bookings[];
