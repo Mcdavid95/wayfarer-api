@@ -36,3 +36,14 @@ export class HttpExceptionFilter implements ExceptionFilter {
       });
   }
 }
+
+export const handleException = (status: string, message: string): Promise<unknown> => {
+  return new Promise((resolve, reject) => {
+    reject(
+      new Exception({
+        status,
+        message
+      })
+    )
+  })
+}

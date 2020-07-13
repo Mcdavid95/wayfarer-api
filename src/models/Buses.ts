@@ -1,4 +1,4 @@
-import { Column, Model, Table, HasMany } from 'sequelize-typescript';
+import { Column, Model, Table, HasMany, Unique } from 'sequelize-typescript';
 import { Trips } from './Trips';
 
 @Table({
@@ -7,6 +7,7 @@ import { Trips } from './Trips';
     updatedAt: 'updated_at'
 })
 export class Buses extends Model<Buses> {
+    @Unique
     @Column
     number_plate: string;
 

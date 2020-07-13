@@ -1,9 +1,6 @@
-import { IsEmail, IsNotEmpty, IsString, IsNumberString, IsNumber } from "class-validator";
+import { IsNotEmpty, IsString, IsNumberString, IsNumber } from "class-validator";
 
-export class CreateUser {
-  @IsNotEmpty()
-  @IsString()
-  first_name: string;
+export class CreateBuses {
 
   @IsNotEmpty()
   @IsString()
@@ -26,9 +23,3 @@ export class CreateUser {
   capacity: number;
 }
 
-export interface GetUser {
-  first_name: string;
-  last_name: string;
-  email: string;
-  phone: string;
-}

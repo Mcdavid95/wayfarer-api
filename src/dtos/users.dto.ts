@@ -22,9 +22,3 @@ export class CreateUser {
   phone: string;
 }
 
-export interface GetUser {
-  first_name: string;
-  last_name: string;
-  email: string;
-  phone: string;
-}
