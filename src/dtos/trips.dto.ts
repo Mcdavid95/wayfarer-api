@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, IsNumberString, IsNumber, IsDate, IsObject, IsArray } from "class-validator";
+import { IsNotEmpty, IsString, IsNumberString, IsNumber, IsArray, IsDateString } from "class-validator";
 import { Seats } from "src/interfaces/trip.interface";
 
 export class CreateTrips {
@@ -16,7 +16,7 @@ export class CreateTrips {
   destination: string;
 
   @IsNotEmpty()
-  @IsDate()
+  @IsDateString()
   trip_date: string;
 
   @IsNotEmpty()
@@ -24,7 +24,7 @@ export class CreateTrips {
   status: string;
 
   @IsNotEmpty()
-  @IsNumber()
+  @IsNumberString()
   fare: number;
 
   @IsNotEmpty()
