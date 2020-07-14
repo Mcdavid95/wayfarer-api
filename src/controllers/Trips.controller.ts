@@ -12,10 +12,11 @@ import { CreateTrips } from 'src/dtos/trips.dto';
 import { handleException } from 'src/utils/errorResponse';
 import { TripResponse, TripsResponse } from 'src/interfaces/response';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
+import { BusesService } from 'src/services/Buses.service';
 
 @Controller()
 export class TripController {
-  constructor(private readonly tripService: TripsService) {}
+  constructor(private readonly tripService: TripsService, private readonly busService: BusesService) {}
 
   /**
    * @method create
@@ -29,6 +30,10 @@ export class TripController {
     { bus_id, origin, destination, trip_date, status, fare, seats }: CreateTrips,
   ): Promise<TripResponse | any> {
     try {
+      const busExists = await this.busService.findById(bus_id);
+      if (!busExists) {
+        return handleException('NOT_FOUND', `Bus with bus_id: ${bus_id} does not exist`)
+      }
       const options = {
         where: { bus_id, trip_date },
       };

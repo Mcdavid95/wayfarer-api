@@ -2,9 +2,9 @@ import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { ConfigModule } from '@nestjs/config';
 import { BookingsModule } from './modules/booking.module';
-import { TripsModule } from './modules/trip.module';
 import { UserHttpModule } from './modules/user-http.module';
 import { BusHttpModule } from './modules/bus-http.module';
+import { TripHttpModule } from './modules/trip-http.module';
 
 @Module({
   imports: [
@@ -20,7 +20,7 @@ import { BusHttpModule } from './modules/bus-http.module';
     ConfigModule.forRoot(),
     UserHttpModule,
     BusHttpModule,
-    TripsModule,
+    TripHttpModule,
     BookingsModule
   ],
 })

@@ -18,7 +18,7 @@ console.log(jwtConstants.secret)
     }),
     JwtModule.register({
       secret: jwtConstants.secret,
-      signOptions: { expiresIn: '3600s' }
+      signOptions: { expiresIn: '7d' }
     })
   ],
   providers: [UsersService, AuthService, LocalStrategy, JwtStrategy],

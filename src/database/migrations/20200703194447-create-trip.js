@@ -37,7 +37,7 @@ module.exports = {
             },
 
             seats: {
-                type: Sequelize.JSONB
+                type: Sequelize.ARRAY(Sequelize.JSONB)
             },
 
             created_at: {
