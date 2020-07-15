@@ -58,7 +58,6 @@ export class UserController {
   async login(@Request() req): Promise<LoginResponse> {
     try {
       const jwtObject = await this.authService.login(req.user);
-      console.log(jwtObject)
       return {
         success: true,
         data: jwtObject

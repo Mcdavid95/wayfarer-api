@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Trips } from '../models/Trips';
 import { CreateTrips } from '../dtos/trips.dto';
+import { any } from 'sequelize/types/lib/operators';
 
 
 @Injectable()
@@ -52,4 +53,8 @@ export class TripsService {
     const Trips = await this.findOne(id);
     await Trips.destroy();
   }
+
+  // async update(updateObject: any, options: any): Promise<Trips> {
+  //   return await this.TripsModel.update(updateObject, options)
+  // }
 }

@@ -1,6 +1,7 @@
 import { JwtObject, GetUser } from "./auth.interface";
 import { GetBus } from "./bus.interface";
 import { GetTrip } from "./trip.interface";
+import { GetBooking } from "./bookings.interface";
 
 export interface UserResponse {
   success: boolean,
@@ -33,4 +34,13 @@ export interface TripResponse {
 export interface TripsResponse {
   success: boolean,
   data: GetTrip[]
+}
+
+export interface BookingResponse {
+  success: boolean,
+  data: GetBooking
+}
+export interface BookingsResponse {
+  success: boolean,
+  data: GetBooking[]
 }
