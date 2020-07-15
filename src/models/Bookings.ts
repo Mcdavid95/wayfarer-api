@@ -21,4 +21,7 @@ export class Bookings extends Model<Bookings> {
 
     @BelongsTo(() => Users)
     user: Users;
+
+    @BelongsTo(() => Trips)
+    trip: Trips;
 }
