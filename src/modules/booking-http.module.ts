@@ -4,8 +4,6 @@ import { BookingsService } from 'src/services/Bookings.service';
 import { BookingController } from 'src/controllers/Bookings.controller';
 import { TripHttpModule } from './trip-http.module';
 import { UserHttpModule } from './user-http.module';
-import { Trips } from 'src/models/Trips';
-import { Users } from 'src/models/Users';
 import { TripsModule } from './trip.module';
 import { UsersModule } from './user.module';
 

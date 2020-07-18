@@ -8,12 +8,12 @@ import {
   Get,
   UseGuards,
 } from '@nestjs/common';
-import { BookingsService } from 'src/services/Bookings.service';
-import { CreateBookings } from 'src/dtos/bookings.dto';
-import { handleException } from 'src/utils/errorResponse';
-import { BookingResponse, BookingsResponse } from 'src/interfaces/response';
-import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
-import { TripsService } from 'src/services/Trips.service';
+import { BookingsService } from '../services/Bookings.service';
+import { CreateBookings } from '../dtos/bookings.dto';
+import { handleException } from '../utils/errorResponse';
+import { BookingResponse, BookingsResponse } from '../interfaces/response';
+import { JwtAuthGuard } from '../guards/jwt-auth.guard';
+import { TripsService } from '../services/Trips.service';
 
 @Controller()
 export class BookingController {

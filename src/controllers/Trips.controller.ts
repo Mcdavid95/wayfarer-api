@@ -7,12 +7,12 @@ import {
   Get,
   UseGuards,
 } from '@nestjs/common';
-import { TripsService } from 'src/services/Trips.service';
-import { CreateTrips } from 'src/dtos/trips.dto';
-import { handleException } from 'src/utils/errorResponse';
-import { TripResponse, TripsResponse } from 'src/interfaces/response';
-import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
-import { BusesService } from 'src/services/Buses.service';
+import { TripsService } from '../services/Trips.service';
+import { CreateTrips } from '../dtos/trips.dto';
+import { handleException } from '../utils/errorResponse';
+import { TripResponse, TripsResponse } from '../interfaces/response';
+import { JwtAuthGuard } from '../guards/jwt-auth.guard';
+import { BusesService } from '../services/Buses.service';
 
 @Controller()
 export class TripController {

@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TripsModule } from './trip.module';
-import { TripsService } from 'src/services/Trips.service';
-import { TripController } from 'src/controllers/Trips.controller';
+import { TripsService } from '../services/Trips.service';
+import { TripController } from '../controllers/Trips.controller';
 import { BusHttpModule } from './bus-http.module';
 
 @Module({

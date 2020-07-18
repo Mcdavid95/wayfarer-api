@@ -3,7 +3,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Trips } from '../models/Trips';
 import { CreateTrips } from '../dtos/trips.dto';
-import { any } from 'sequelize/types/lib/operators';
 
 
 @Injectable()

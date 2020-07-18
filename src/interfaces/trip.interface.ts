@@ -4,13 +4,15 @@ export interface Seats {
 }
 
 export interface GetTrip {
+  id?: number
+
   bus_id: number;
 
   origin: string;
 
   destination: string;
 
-  trip_date: Date;
+  trip_date: Date | string;
 
   status: string;
 

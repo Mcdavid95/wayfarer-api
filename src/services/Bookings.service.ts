@@ -107,6 +107,5 @@ export class BookingsService {
     })
     trip.seats = updatedSeats
     await trip.save();
-    console.info((trip))
   }
 }

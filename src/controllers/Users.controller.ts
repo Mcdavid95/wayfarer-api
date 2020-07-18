@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { Controller, Request, Post, Body, UseFilters, UseGuards } from '@nestjs/common';
-import { CreateUser } from 'src/dtos/users.dto';
-import { UserResponse, LoginResponse } from 'src/interfaces/response';
-import { AuthService } from 'src/services/Auth.service';
-import { UsersService } from 'src/services/Users.service';
-import { HttpExceptionFilter, Exception } from 'src/utils/errorResponse';
+import { CreateUser } from '../dtos/users.dto';
+import { UserResponse, LoginResponse } from '../interfaces/response';
+import { AuthService } from '../services/Auth.service';
+import { UsersService } from '../services/Users.service';
+import { HttpExceptionFilter, Exception } from '../utils/errorResponse';
 import { AuthGuard } from '@nestjs/passport';
 
 @Controller()
@@ -27,6 +27,7 @@ export class UserController {
       };
       const userExist = await this.usersService.findOne(options);
       if (userExist) {
+        console.log(userExist)
         return new Promise((resolve, reject) => {
           reject(
             new Exception({
@@ -57,7 +58,7 @@ export class UserController {
   @Post('auth/login')
   async login(@Request() req): Promise<LoginResponse> {
     try {
-      const jwtObject = await this.authService.login(req.user);
+      const jwtObject = await this.authService.getToken(req.user);
       return {
         success: true,
         data: jwtObject

@@ -7,11 +7,11 @@ import {
   Get,
   UseGuards,
 } from '@nestjs/common';
-import { BusesService } from 'src/services/Buses.service';
-import { CreateBuses } from 'src/dtos/buses.dto';
-import { handleException } from 'src/utils/errorResponse';
-import { BusResponse, BusesResponse } from 'src/interfaces/response';
-import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
+import { BusesService } from '../services/Buses.service';
+import { CreateBuses } from '../dtos/buses.dto';
+import { handleException } from '../utils/errorResponse';
+import { BusResponse, BusesResponse } from '../interfaces/response';
+import { JwtAuthGuard } from '../guards/jwt-auth.guard';
 
 @Controller()
 export class BusController {
