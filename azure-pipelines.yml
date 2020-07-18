@@ -21,10 +21,6 @@ steps:
     npm run build
   displayName: 'npm install and build'
 
-- task: Npm@1
-  inputs:
-    command: 'custom'
-
 - script: |
     npm run test
     npm run test:cov
