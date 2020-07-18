@@ -1,7 +1,7 @@
 import { BusController } from "./Buses.controller"
 import { TestingModule, Test } from "@nestjs/testing";
 import { BusesService } from "./Buses.service";
-import { CreateBuses } from "./buses.dto";
+import { CreateBuses } from "./dtos/buses.dto";
 import { BusResponse, BusesResponse } from "../interfaces/response";
 import { getModelToken } from "@nestjs/sequelize";
 import { Buses } from "./Buses.entity";

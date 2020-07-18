@@ -2,7 +2,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Trips } from './Trips.entity';
-import { CreateTrips } from './trips.dto';
+import { CreateTrips } from './dtos/trips.dto';
 
 
 @Injectable()

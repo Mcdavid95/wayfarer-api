@@ -1,4 +1,4 @@
-import { CreateUser } from "src/users/users.dto"
+import { CreateUser } from "src/users/dtos/users.dto"
 import { JwtPayload } from "src/auth/auth.interface"
 
 export const userReq = {

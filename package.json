@@ -27,6 +27,7 @@
     "@nestjs/passport": "^7.1.0",
     "@nestjs/platform-express": "^7.1.1",
     "@nestjs/sequelize": "^0.1.0",
+    "@nestjs/swagger": "^4.5.12",
     "bcrypt": "^5.0.0",
     "class-transformer": "^0.2.3",
     "class-validator": "^0.12.2",
@@ -39,7 +40,8 @@
     "rimraf": "^3.0.2",
     "rxjs": "^6.5.5",
     "sequelize": "^5.22.3",
-    "sequelize-typescript": "^1.1.0"
+    "sequelize-typescript": "^1.1.0",
+    "swagger-ui-express": "^4.1.4"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.2.0",
@@ -78,7 +80,12 @@
       "ts"
     ],
     "rootDir": "src",
-    "coveragePathIgnorePatterns": ["<rootDir>/models/", "<rootDir>/config/", "<rootDir>/database/", "/node_modules/"],
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/models/",
+      "<rootDir>/config/",
+      "<rootDir>/database/",
+      "/node_modules/"
+    ],
     "testRegex": ".spec.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"

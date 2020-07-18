@@ -8,7 +8,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { TripsService } from './Trips.service';
-import { CreateTrips } from './trips.dto';
+import { CreateTrips } from './dtos/trips.dto';
 import { handleException } from '../utils/errorResponse';
 import { TripResponse, TripsResponse } from '../interfaces/response';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';

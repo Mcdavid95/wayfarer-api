@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { Controller, Request, Post, Body, UseFilters, UseGuards } from '@nestjs/common';
-import { CreateUser } from './users.dto';
+import { CreateUser } from './dtos/users.dto';
 import { UserResponse, LoginResponse } from '../interfaces/response';
 import { AuthService } from '../auth/Auth.service';
 import { UsersService } from './Users.service';

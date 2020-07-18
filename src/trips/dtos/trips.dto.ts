@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsString, IsNumberString, IsNumber, IsArray, IsDateString } from "class-validator";
-import { Seats } from "./trip.interface";
+import { Seats } from "../trip.interface";
 
 export class CreateTrips {
 

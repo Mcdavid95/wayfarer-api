@@ -2,7 +2,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Bookings } from './Bookings.entity';
-import { CreateBookings } from '../bookings/bookings.dto';
+import { CreateBookings } from './dtos/bookings.dto';
 import { Trips } from '../trips/Trips.entity';
 import { Users } from '../users/Users.entity';
 import { GetBooking, CheckSeatAvailability } from 'src/bookings/bookings.interface';

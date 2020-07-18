@@ -1,7 +1,7 @@
 import { TripController } from "./Trips.controller"
 import { TestingModule, Test } from "@nestjs/testing";
 import { BusesService } from "../buses/Buses.service";
-import { CreateTrips } from "./trips.dto";
+import { CreateTrips } from "./dtos/trips.dto";
 import { TripResponse, TripsResponse } from "../interfaces/response";
 import { getModelToken } from "@nestjs/sequelize";
 import { Buses } from "../buses/Buses.entity";

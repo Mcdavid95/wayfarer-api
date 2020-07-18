@@ -1,7 +1,7 @@
 import { BookingController } from './Bookings.controller';
 import { TestingModule, Test } from '@nestjs/testing';
 import { TripsService } from '../trips/Trips.service';
-import { CreateBookings } from './bookings.dto';
+import { CreateBookings } from './dtos/bookings.dto';
 import {
   BookingResponse,
   BookingsResponse,

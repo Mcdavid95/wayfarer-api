@@ -8,7 +8,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { BusesService } from './Buses.service';
-import { CreateBuses } from './buses.dto';
+import { CreateBuses } from './dtos/buses.dto';
 import { handleException } from '../utils/errorResponse';
 import { BusResponse, BusesResponse } from '../interfaces/response';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';

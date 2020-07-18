@@ -9,7 +9,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { BookingsService } from './Bookings.service';
-import { CreateBookings } from './bookings.dto';
+import { CreateBookings } from './dtos/bookings.dto';
 import { handleException } from '../utils/errorResponse';
 import { BookingResponse, BookingsResponse } from '../interfaces/response';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';

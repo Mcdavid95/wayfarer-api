@@ -2,7 +2,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Users } from './Users.entity';
-import { CreateUser } from './users.dto';
+import { CreateUser } from './dtos/users.dto';
 
 
 @Injectable()

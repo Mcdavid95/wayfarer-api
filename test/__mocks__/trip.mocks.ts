@@ -1,5 +1,5 @@
-import { CreateTrips } from "../../src/trips/trips.dto"
-import { CreateBuses } from "src/buses/buses.dto"
+import { CreateTrips } from "../../src/trips/dtos/trips.dto"
+import { CreateBuses } from "src/buses/dtos/buses.dto"
 
 export const mockTripService = {
   findById: jest.fn().mockImplementation((id: number) => {
