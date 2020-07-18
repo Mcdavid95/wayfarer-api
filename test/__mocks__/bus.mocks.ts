@@ -1,4 +1,4 @@
-import { CreateBuses } from "src/dtos/buses.dto"
+import { CreateBuses } from "src/buses/buses.dto"
 
 export const mockBusService = {
   findById: jest.fn().mockImplementation((id: number) => {

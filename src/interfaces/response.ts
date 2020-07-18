@@ -1,7 +1,7 @@
-import { JwtObject, GetUser } from "./auth.interface";
-import { GetBus } from "./bus.interface";
-import { GetTrip } from "./trip.interface";
-import { GetBooking } from "./bookings.interface";
+import { JwtObject, GetUser } from "../auth/auth.interface";
+import { GetBus } from "../buses/bus.interface";
+import { GetTrip } from "../trips/trip.interface";
+import { GetBooking } from "../bookings/bookings.interface";
 
 export interface UserResponse {
   success: boolean,
