@@ -1,73 +1,50 @@
-import { CreateTrips } from "../../src/trips/dtos/trips.dto"
-import { CreateBuses } from "src/buses/dtos/buses.dto"
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { CreateTripsDto } from "../../src/trips/dtos/trips.dto"
+import { CreateBusesDto } from "src/buses/dtos/buses.dto"
 
 export const mockTripService = {
   findById: jest.fn().mockImplementation((id: number) => {
     return {
       id,
       bus_id: 2,
-      origin: 'Ikeja Along',
-      destination: 'Shomolu',
+      route_id: 3,
       trip_date: new Date('2018-05-23T18:25:43.511Z').toDateString(),
-      status: 'active',
       fare: 150,
-      seats: [{
-        number: 3,
-        is_taken: false
-      }]
     }
   }),
   findByPk: jest.fn().mockImplementation((id: number) => {
     return {
       id,
       bus_id: 2,
-      origin: 'Ikeja Along',
-      destination: 'Shomolu',
+      route_id: 3,
       trip_date: new Date('2018-05-23T18:25:43.511Z').toDateString(),
-      status: 'active',
       fare: 150,
-      seats: [{
-        number: 3,
-        is_taken: false
-      }]
     }
   }),
-  findOne: jest.fn().mockImplementation((tripObject: CreateTrips) => {
+  findOne: jest.fn().mockImplementation((tripObject: CreateTripsDto) => {
     const res =  {
       bus_id: tripObject.bus_id,
-      origin: tripObject.origin,
-      destination: tripObject.destination,
       trip_date: tripObject.trip_date,
-      status: tripObject.status,
       fare: tripObject.fare,
-      seats: tripObject.seats
+      route_id: tripObject.route_id
     }
   }),
-  create: jest.fn().mockImplementation((body: CreateTrips) => {
+  create: jest.fn().mockImplementation((body: CreateTripsDto) => {
     return {
       id: 2,
       bus_id: body.bus_id,
-      origin: body.origin,
-      destination: body.destination,
       trip_date: body.trip_date,
-      status: body.status,
       fare: body.fare,
-      seats: body.seats
+      route_id: body.route_id
     }
   }),
   findAll: jest.fn().mockResolvedValue([
     {
       id: 2,
       bus_id: 2,
-      origin: 'Ikeja Along',
-      destination: 'Shomolu',
+      route_id: 3,
       trip_date: new Date('2018-05-23T18:25:43.511Z').toDateString(),
-      status: 'active',
       fare: 150,
-      seats: [{
-        number: 3,
-        is_taken: false
-      }]
     }
   ])
 }
@@ -76,6 +53,7 @@ export const mockBusService = {
   findById: jest.fn().mockImplementation((id: number) => {
     return {
       id,
+      owner_id: 2,
       number_plate: 'FJK24R',
       manufacturer: 'Nissan',
       year: '2008',
@@ -86,6 +64,7 @@ export const mockBusService = {
   findByPk: jest.fn().mockImplementation((id: number) => {
     return {
       id,
+      owner_id: 2,
       number_plate: 'FJK24R',
       manufacturer: 'Nissan',
       year: '2008',
@@ -93,7 +72,7 @@ export const mockBusService = {
       capacity: 12
     }
   }),
-  findOne: jest.fn().mockImplementation((busObject: CreateBuses) => {
+  findOne: jest.fn().mockImplementation((busObject: CreateBusesDto) => {
     return false
   }),
 }

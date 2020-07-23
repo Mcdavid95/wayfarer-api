@@ -9,7 +9,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { BookingsService } from './Bookings.service';
-import { CreateBookings } from './dtos/bookings.dto';
+import { CreateBookingsDto } from './dtos/bookings.dto';
 import { handleException } from '../utils/errorResponse';
 import { BookingResponse, BookingsResponse } from '../interfaces/response';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
@@ -31,7 +31,7 @@ export class BookingController {
   async create(
     @Request() req,
     @Body()
-    { trip_id, seat_number }: CreateBookings,
+    { trip_id }: CreateBookingsDto,
   ): Promise<BookingResponse | any> {
     try {
       const tripExists = await this.tripService.findById(trip_id);
@@ -41,20 +41,20 @@ export class BookingController {
           `Trip with trip_id: ${trip_id} does not exist`,
         );
       }
-      const seatAvailable = await this.bookingService.checkSeatAvailability(
-        trip_id,
-        seat_number,
-      );
-      if (!seatAvailable.status) {
-        const availableSeats = seatAvailable.seats.map(seat => seat.number)
-        return handleException('BAD_REQUEST', `Seat number ${seat_number} is currently not available. Select from the following available seats. ${availableSeats}`)
-      }
+      // const seatAvailable = await this.bookingService.checkSeatAvailability(
+      //   trip_id,
+      //   seat_number,
+      // );
+      // if (!seatAvailable.status) {
+      //   const availableSeats = seatAvailable.seats.map(seat => seat.number)
+      //   return handleException('BAD_REQUEST', `Seat number ${seat_number} is currently not available. Select from the following available seats. ${availableSeats}`)
+      // }
       const booking = await this.bookingService.create({
         trip_id,
         user_id: req.user.id,
-        seat_number,
+        // seat_number,
       });
-      await this.bookingService.reserveSeat(trip_id, seat_number)
+      // await this.bookingService.reserveSeat(trip_id, seat_number)
       return {
         success: true,
         data: booking,

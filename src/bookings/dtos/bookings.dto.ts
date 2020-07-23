@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsNumber } from "class-validator";
 
-export class CreateBookings {
+export class CreateBookingsDto {
 
   @IsNotEmpty()
   @IsNumber()

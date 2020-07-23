@@ -8,7 +8,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { TripsService } from './Trips.service';
-import { CreateTrips } from './dtos/trips.dto';
+import { CreateTripsDto } from './dtos/trips.dto';
 import { handleException } from '../utils/errorResponse';
 import { TripResponse, TripsResponse } from '../interfaces/response';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
@@ -27,7 +27,7 @@ export class TripController {
   async create(
     @Request()
     @Body()
-    { bus_id, origin, destination, trip_date, status, fare, seats }: CreateTrips,
+    { bus_id, trip_date, fare, route_id }: CreateTripsDto,
   ): Promise<TripResponse | any> {
     try {
       const busExists = await this.busService.findById(bus_id);
@@ -43,12 +43,9 @@ export class TripController {
       }
       const trip = await this.tripService.create({
         bus_id,
-        origin,
-        destination,
         trip_date,
-        status,
         fare,
-        seats
+        route_id
       });
       return {
         success: true,

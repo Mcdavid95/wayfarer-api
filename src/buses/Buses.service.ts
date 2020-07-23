@@ -2,7 +2,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Buses } from './Buses.entity';
-import { CreateBuses } from './dtos/buses.dto';
+import { CreateBusesDto } from './dtos/buses.dto';
 
 
 @Injectable()
@@ -14,9 +14,9 @@ export class BusesService {
 
   /**
    * @method create
-   * @param {CreateBuses} body 
+   * @param {CreateBusesDto} body 
    */
-  async create (body: CreateBuses): Promise<Buses> {
+  async create (body: CreateBusesDto): Promise<Buses> {
     return this.BusesModel.create(body);
   }
 

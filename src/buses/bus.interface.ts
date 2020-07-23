@@ -5,4 +5,5 @@ export interface GetBus {
   model: string;
   year: string;
   capacity: number;
+  owner_id: number;
 }

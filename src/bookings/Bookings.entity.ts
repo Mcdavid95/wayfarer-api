@@ -12,8 +12,8 @@ export class Bookings extends Model<Bookings> {
     @Column(DataType.INTEGER)
     trip_id: number;
 
-    @Column(DataType.INTEGER)
-    seat_number: number;
+    // @Column(DataType.INTEGER)
+    // seat_number: number;
 
     @ForeignKey(() => Users)
     @Column(DataType.INTEGER)

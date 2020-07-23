@@ -1,26 +1,19 @@
 import { TripController } from "./Trips.controller"
 import { TestingModule, Test } from "@nestjs/testing";
 import { BusesService } from "../buses/Buses.service";
-import { CreateTrips } from "./dtos/trips.dto";
+import { CreateTripsDto } from "./dtos/trips.dto";
 import { TripResponse, TripsResponse } from "../interfaces/response";
 import { getModelToken } from "@nestjs/sequelize";
 import { Buses } from "../buses/Buses.entity";
-import { GetTrip } from "src/trips/trip.interface";
 import { Trips } from "./Trips.entity";
 import { mockTripService, mockBusService } from "../../test/__mocks__/trip.mocks";
 import { TripsService } from "./Trips.service";
 
-const tripRequest: CreateTrips = {
+const tripRequest: CreateTripsDto = {
   bus_id: 2,
-  origin: 'Ikeja Along',
-  destination: 'Shomolu',
   trip_date: new Date('2018-05-23T18:25:43.511Z').toDateString(),
-  status: 'active',
   fare: 150,
-  seats: [{
-    number: 3,
-    is_taken: false
-  }]
+  route_id: 3
 }
 
 const tripResponse: TripResponse = {

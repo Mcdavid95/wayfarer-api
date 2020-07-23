@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import {
   Controller,
   Request,
@@ -8,7 +9,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { BusesService } from './Buses.service';
-import { CreateBuses } from './dtos/buses.dto';
+import { CreateBusesDto } from './dtos/buses.dto';
 import { handleException } from '../utils/errorResponse';
 import { BusResponse, BusesResponse } from '../interfaces/response';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
@@ -24,9 +25,9 @@ export class BusController {
   @UseGuards(JwtAuthGuard)
   @Post('buses')
   async create(
-    @Request()
+    @Request() req,
     @Body()
-    { number_plate, manufacturer, year, model, capacity }: CreateBuses,
+    { number_plate, manufacturer, year, model, capacity }: CreateBusesDto,
   ): Promise<BusResponse | any> {
     try {
       const options = {
@@ -37,6 +38,7 @@ export class BusController {
         return handleException('CONFLICT', 'Bus with the same number_plate already exist');
       }
       const bus = await this.busService.create({
+        owner_id: req.user.id,
         number_plate,
         manufacturer,
         year,

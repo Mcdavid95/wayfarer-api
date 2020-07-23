@@ -25,6 +25,11 @@ module.exports = {
                 defaultValue: false
             },
 
+            user_type: {
+                type: Sequelize.ENUM({
+                    values: ['PASSENGER', 'DRIVER', 'ORGANIZATION']
+                })
+            },
 
             password: {
                 type: Sequelize.STRING
@@ -48,6 +53,7 @@ module.exports = {
         });
     },
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     down: (queryInterface, Sequelize) => {
         return queryInterface.dropTable('Users');
     }

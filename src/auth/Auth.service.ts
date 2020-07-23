@@ -1,7 +1,7 @@
 import * as bcrypt from 'bcrypt';
 import { Injectable } from '@nestjs/common';
 import { UsersService } from '../users/Users.service';
-import { CreateUser } from '../users/dtos/users.dto';
+import { CreateUserDto } from '../users/dtos/users.dto';
 import { JwtPayload, JwtObject } from './auth.interface';
 import { JwtService } from '@nestjs/jwt';
 
@@ -9,7 +9,7 @@ import { JwtService } from '@nestjs/jwt';
 export class AuthService {
   constructor(private readonly usersService: UsersService, private readonly jwtService: JwtService) {}
 
-  async signUpUser(body: CreateUser): Promise<any> {
+  async signUpUser(body: CreateUserDto): Promise<any> {
     try {
       const hashedPassword = await this.hashPassword(body.password);
       
@@ -38,6 +38,7 @@ export class AuthService {
           };
           const user = await this.usersService.findOne(options);
           if (user && this.isPassword( pass, user.password )) {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { password, ...result } = user['dataValues'];
             resolve(result);
           } else {

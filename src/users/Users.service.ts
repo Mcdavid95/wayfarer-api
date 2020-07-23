@@ -2,7 +2,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Users } from './Users.entity';
-import { CreateUser } from './dtos/users.dto';
+import { CreateUserDto } from './dtos/users.dto';
 
 
 @Injectable()
@@ -14,9 +14,9 @@ export class UsersService {
 
   /**
    * @method create
-   * @param {CreateUser} body 
+   * @param {CreateUserDto} body 
    */
-  async create (body: CreateUser): Promise<Users> {
+  async create (body: CreateUserDto): Promise<Users> {
     return this.userModel.create(body);
   }
 
