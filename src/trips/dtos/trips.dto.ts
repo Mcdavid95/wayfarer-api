@@ -1,34 +1,21 @@
-import { IsNotEmpty, IsString, IsNumberString, IsNumber, IsArray, IsDateString } from "class-validator";
-import { Seats } from "../trip.interface";
+import { IsNotEmpty, IsNumberString, IsNumber, IsDateString } from "class-validator";
 
-export class CreateTrips {
+export class CreateTripsDto {
 
   @IsNotEmpty()
   @IsNumber()
   bus_id: number;
 
   @IsNotEmpty()
-  @IsString()
-  origin: string;
-
-  @IsNotEmpty()
-  @IsString()
-  destination: string;
+  @IsNumber()
+  route_id: number;
 
   @IsNotEmpty()
   @IsDateString()
   trip_date: string;
 
   @IsNotEmpty()
-  @IsString()
-  status: string;
-
-  @IsNotEmpty()
   @IsNumberString()
   fare: number;
-
-  @IsNotEmpty()
-  @IsArray()
-  seats: Seats[]
 }
 

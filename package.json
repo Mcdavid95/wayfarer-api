@@ -6,9 +6,11 @@
   "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
+    "db:migrate": "sequelize db:migrate",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
+    "prestart": "npm run db:migrate",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
@@ -45,6 +47,7 @@
     "swagger-ui-express": "^4.1.4"
   },
   "devDependencies": {
+    "@compodoc/compodoc": "^1.1.11",
     "@nestjs/cli": "^7.2.0",
     "@nestjs/schematics": "^7.0.0",
     "@nestjs/testing": "^7.1.1",

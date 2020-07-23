@@ -9,7 +9,7 @@ import { AuthService } from '../auth/Auth.service';
 import { UserResponse } from '../interfaces/response';
 import { jwtConstants } from '../utils/constants';
 import { JwtStrategy } from '../auth/jwt.strategy';
-import { CreateUser } from 'src/users/dtos/users.dto';
+import { CreateUserDto } from 'src/users/dtos/users.dto';
 import { mockAuthService, mockJwtService, jwtResult } from '../../test/__mocks__/user.mocks';
 
 
@@ -17,7 +17,7 @@ import { mockAuthService, mockJwtService, jwtResult } from '../../test/__mocks__
 describe('UserController', () => {
   let usersController: UserController;
 
-  const userResult: CreateUser = {
+  const userResult: CreateUserDto = {
     email: 'yuil@gmail.com',
     first_name: 'Mcdavid',
     last_name: 'Eme',

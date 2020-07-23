@@ -1,7 +1,7 @@
-import { Column, Model, Table, DataType, ForeignKey, HasMany } from 'sequelize-typescript';
+import { Column, Model, Table, ForeignKey, HasMany } from 'sequelize-typescript';
 import { Buses } from '../buses/Buses.entity';
 import { Bookings } from '../bookings/Bookings.entity';
-import { Seats } from 'src/trips/trip.interface';
+import { Routes } from '../routes/Routes.entity';
 
 @Table({
     timestamps: true,
@@ -13,11 +13,9 @@ export class Trips extends Model<Trips> {
     @Column
     bus_id: number;
 
+    @ForeignKey(() => Routes)
     @Column
-    origin: string;
-
-    @Column
-    destination: string;
+    route_id: number;
 
     @Column
     trip_date: Date;
@@ -27,9 +25,6 @@ export class Trips extends Model<Trips> {
 
     @Column
     fare: number;
-
-    @Column(DataType.ARRAY(DataType.JSONB))
-    seats: Seats[]; // actually a jsonb column
 
     @HasMany(() => Bookings)
     tickets: Bookings[];

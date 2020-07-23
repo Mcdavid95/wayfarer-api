@@ -8,15 +8,9 @@ export interface GetTrip {
 
   bus_id: number;
 
-  origin: string;
-
-  destination: string;
+  route_id: number;
 
   trip_date: Date | string;
 
-  status: string;
-
   fare: number;
-
-  seats: Seats[]
 }

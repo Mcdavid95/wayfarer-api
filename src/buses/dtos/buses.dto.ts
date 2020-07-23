@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsString, IsNumberString, IsNumber } from "class-validator";
 
-export class CreateBuses {
+export class CreateBusesDto {
 
   @IsNotEmpty()
   @IsString()
@@ -21,5 +21,9 @@ export class CreateBuses {
   @IsNotEmpty()
   @IsNumber()
   capacity: number;
+
+  @IsNotEmpty()
+  @IsNumber()
+  owner_id: number;
 }
 

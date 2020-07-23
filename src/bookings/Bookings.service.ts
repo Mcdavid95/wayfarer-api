@@ -2,11 +2,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Bookings } from './Bookings.entity';
-import { CreateBookings } from './dtos/bookings.dto';
 import { Trips } from '../trips/Trips.entity';
 import { Users } from '../users/Users.entity';
-import { GetBooking, CheckSeatAvailability } from 'src/bookings/bookings.interface';
-import { Seats } from 'src/trips/trip.interface';
+import { GetBooking } from 'src/bookings/bookings.interface';
 import { TripsService } from '../trips/Trips.service';
 
 
@@ -20,7 +18,7 @@ export class BookingsService {
 
   /**
    * @method create
-   * @param {CreateBookings} body 
+   * @param {CreateBookingsDto} body 
    */
   async create (body: GetBooking): Promise<Bookings> {
     return this.BookingsModel.create(body);
@@ -76,36 +74,36 @@ export class BookingsService {
     await Bookings.destroy();
   }
 
-  /**
-   * 
-   * @param tripId trip id
-   * @param seatNumber seat number
-   */
-  async checkSeatAvailability(tripId: number, seatNumber: number): Promise<CheckSeatAvailability> {
-    const trip = await this.tripService.findById(tripId);
-    const checkSeat = trip.seats.filter(seat => seat.number == seatNumber)
-    const availableSeat = trip.seats.filter(seat => seat.is_taken === false)
-    if (checkSeat[0].is_taken) {
-      return {
-        status: false,
-        seats: availableSeat
-      }
-    }
-    return {
-      status: true,
-      seats: checkSeat
-    }
-  }
+//   /**
+//    * 
+//    * @param tripId trip id
+//    * @param seatNumber seat number
+//    */
+//   async checkSeatAvailability(tripId: number, seatNumber: number): Promise<CheckSeatAvailability> {
+//     const trip = await this.tripService.findById(tripId);
+//     const checkSeat = trip.seats.filter(seat => seat.number == seatNumber)
+//     const availableSeat = trip.seats.filter(seat => seat.is_taken === false)
+//     if (checkSeat[0].is_taken) {
+//       return {
+//         status: false,
+//         seats: availableSeat
+//       }
+//     }
+//     return {
+//       status: true,
+//       seats: checkSeat
+//     }
+//   }
 
-  async reserveSeat(tripId: number, seatNumber: number): Promise<void> {
-    const trip = await this.tripService.findById(tripId);
-    const updatedSeats = trip.seats.map((seat) => {
-      if(seat.number == seatNumber) {
-        seat.is_taken = true;
-      }
-      return seat
-    })
-    trip.seats = updatedSeats
-    await trip.save();
-  }
+//   async reserveSeat(tripId: number, seatNumber: number): Promise<void> {
+//     const trip = await this.tripService.findById(tripId);
+//     const updatedSeats = trip.seats.map((seat) => {
+//       if(seat.number == seatNumber) {
+//         seat.is_taken = true;
+//       }
+//       return seat
+//     })
+//     trip.seats = updatedSeats
+//     await trip.save();
+//   }
 }

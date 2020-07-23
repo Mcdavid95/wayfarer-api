@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 module.exports = {
   up: async (queryInterface, Sequelize) => {
       return queryInterface.createTable('Bookings', {

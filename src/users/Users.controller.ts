@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { Controller, Request, Post, Body, UseFilters, UseGuards } from '@nestjs/common';
-import { CreateUser } from './dtos/users.dto';
+import { CreateUserDto } from './dtos/users.dto';
 import { UserResponse, LoginResponse } from '../interfaces/response';
 import { AuthService } from '../auth/Auth.service';
 import { UsersService } from './Users.service';
@@ -19,7 +19,7 @@ export class UserController {
   async register(
     @Request()
     @Body()
-    { email, first_name, last_name, password, phone }: CreateUser,
+    { email, first_name, last_name, password, phone }: CreateUserDto,
   ): Promise<UserResponse> {
     try {
       const options = {

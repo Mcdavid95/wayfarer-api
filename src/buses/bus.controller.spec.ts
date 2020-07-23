@@ -1,17 +1,18 @@
 import { BusController } from "./Buses.controller"
 import { TestingModule, Test } from "@nestjs/testing";
 import { BusesService } from "./Buses.service";
-import { CreateBuses } from "./dtos/buses.dto";
+import { CreateBusesDto } from "./dtos/buses.dto";
 import { BusResponse, BusesResponse } from "../interfaces/response";
 import { getModelToken } from "@nestjs/sequelize";
 import { Buses } from "./Buses.entity";
 import { mockBusService } from "../../test/__mocks__/bus.mocks";
 
-const busRequest: CreateBuses = {
+const busRequest: CreateBusesDto = {
   number_plate: 'FJK24R',
   manufacturer: 'Nissan',
   year: '2008',
   model: 'Path searcher',
+  owner_id: 2,
   capacity: 12
 }
 
@@ -45,7 +46,7 @@ describe('BusController', () => {
 
   describe('Create Bus', () => {
     it('should create new Bus instance', async () => {
-      const response = await busController.create(busRequest);
+      const response = await busController.create({ user: { id: 2 } }, busRequest);
       expect(response).toEqual(busResponse)
     })
   })
