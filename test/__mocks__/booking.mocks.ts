@@ -1,5 +1,5 @@
-import { CreateTrips } from "../../src/trips/dtos/trips.dto"
-import { CreateBuses } from "../../src/buses/dtos/buses.dto"
+import { CreateTripsDto } from "../../src/trips/dtos/trips.dto"
+import { CreateBusesDto } from "../../src/buses/dtos/buses.dto"
 
 export const mockBookingService = {
   findById: jest.fn().mockImplementation((id: number) => {
@@ -17,13 +17,13 @@ export const mockBookingService = {
       seat_number: 3,
     }
   }),
-  findOne: jest.fn().mockImplementation((tripObject: CreateTrips) => {
+  findOne: jest.fn().mockImplementation((tripObject: CreateTripsDto) => {
     const res =  {
       trip_id: 2,
       seat_number: 3,
     }
   }),
-  create: jest.fn().mockImplementation((body: CreateTrips) => {
+  create: jest.fn().mockImplementation((body: CreateTripsDto) => {
     return {
       id: 2,
       user_id: 2,
@@ -77,7 +77,7 @@ export const mockTripService = {
       save: jest.fn()
     }
   }),
-  findOne: jest.fn().mockImplementation((busObject: CreateBuses) => {
+  findOne: jest.fn().mockImplementation((busObject: CreateBusesDto) => {
     return false
   }),
 }

@@ -1,4 +1,4 @@
-import { CreateUser } from "src/users/dtos/users.dto"
+import { CreateUserDto } from "src/users/dtos/users.dto"
 import { JwtPayload } from "src/auth/auth.interface"
 
 export const userReq = {
@@ -14,7 +14,7 @@ export const jwtResult = {
 }
 
 export const mockAuthService = {
-  signUpUser: jest.fn().mockImplementation((body: CreateUser) => {
+  signUpUser: jest.fn().mockImplementation((body: CreateUserDto) => {
     return {
       email: body.email,
       first_name: body.first_name,
@@ -22,7 +22,7 @@ export const mockAuthService = {
       phone: body.phone
     }
   }),
-  findOne: jest.fn().mockImplementation((userObject: CreateUser) => {
+  findOne: jest.fn().mockImplementation((userObject: CreateUserDto) => {
     Promise.resolve({
       email: userObject.email,
       first_name: userObject.first_name,
@@ -30,7 +30,7 @@ export const mockAuthService = {
       phone: userObject.phone
     })
   }),
-  create: jest.fn().mockImplementation((body: CreateUser) => {
+  create: jest.fn().mockImplementation((body: CreateUserDto) => {
     return {
       email: body.email,
       first_name: body.first_name,

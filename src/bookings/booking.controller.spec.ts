@@ -1,7 +1,7 @@
 import { BookingController } from './Bookings.controller';
 import { TestingModule, Test } from '@nestjs/testing';
 import { TripsService } from '../trips/Trips.service';
-import { CreateBookings } from './dtos/bookings.dto';
+import { CreateBookingsDto } from './dtos/bookings.dto';
 import {
   BookingResponse,
   BookingsResponse,
@@ -12,7 +12,7 @@ import { Bookings } from './Bookings.entity';
 import { mockBookingService, mockTripService } from '../../test/__mocks__/booking.mocks';
 import { BookingsService } from './Bookings.service';
 
-const bookingRequest: CreateBookings = {
+const bookingRequest: CreateBookingsDto = {
   trip_id: 2,
   seat_number: 3,
 };
