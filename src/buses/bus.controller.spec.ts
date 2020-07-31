@@ -6,6 +6,8 @@ import { BusResponse, BusesResponse } from "../interfaces/response";
 import { getModelToken } from "@nestjs/sequelize";
 import { Buses } from "./Buses.entity";
 import { mockBusService } from "../../test/__mocks__/bus.mocks";
+import { DriversService } from "../drivers/Drivers.service";
+import { Drivers } from "../drivers/Drivers.entity";
 
 const busRequest: CreateBusesDto = {
   number_plate: 'FJK24R',
@@ -33,11 +35,17 @@ describe('BusController', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers:[
         BusesService,
+        DriversService,
         {
           provide: getModelToken(Buses),
           useValue: mockBusService
+        },
+        {
+          provide: getModelToken(Drivers),
+          useValue: mockBusService
         }
       ],
+      // imports: [DriversModule],
       controllers: [BusController]
     }).compile();
 

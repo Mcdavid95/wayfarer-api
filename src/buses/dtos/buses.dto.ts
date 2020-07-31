@@ -1,29 +1,37 @@
-import { IsNotEmpty, IsString, IsNumberString, IsNumber } from "class-validator";
+import { IsNotEmpty, IsString, IsNumberString, IsNumber, IsOptional } from "class-validator";
+import { ApiProperty, ApiHideProperty } from "@nestjs/swagger";
 
 export class CreateBusesDto {
 
   @IsNotEmpty()
   @IsString()
+  @ApiProperty()
   number_plate: string;
 
   @IsNotEmpty()
   @IsString()
+  @ApiProperty()
   manufacturer: string;
 
   @IsNotEmpty()
   @IsString()
+  @ApiProperty()
   model: string;
 
   @IsNotEmpty()
   @IsNumberString()
+  @ApiProperty()
   year: string;
 
   @IsNotEmpty()
-  @IsNumber()
+  // @IsNumber()
+  @ApiProperty()
   capacity: number;
 
   @IsNotEmpty()
-  @IsNumber()
+  @IsOptional()
+  // @IsNumber()
+  @ApiHideProperty()
   owner_id: number;
 }
 

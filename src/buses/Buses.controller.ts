@@ -7,14 +7,17 @@ import {
   Param,
   Get,
   UseGuards,
+  UseFilters,
 } from '@nestjs/common';
 import { BusesService } from './Buses.service';
 import { CreateBusesDto } from './dtos/buses.dto';
-import { handleException } from '../utils/errorResponse';
+import { handleException, HttpExceptionFilter } from '../utils/errorResponse';
 import { BusResponse, BusesResponse } from '../interfaces/response';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { DriversGuard } from '../common/guards/driverRole.guard';
 
 @Controller()
+@UseFilters(new HttpExceptionFilter())
 export class BusController {
   constructor(private readonly busService: BusesService) {}
 
@@ -22,7 +25,7 @@ export class BusController {
    * @method create
    *
    */
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, DriversGuard)
   @Post('buses')
   async create(
     @Request() req,
@@ -54,7 +57,7 @@ export class BusController {
     }
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, DriversGuard)
   @Get('buses/:id')
   async getBus(@Param() params: { id: number }): Promise<BusResponse | any> {
     try {

@@ -6,6 +6,7 @@ import { TripHttpModule } from './trips/trip-http.module';
 import { BookingHttpModule } from './bookings/booking-http.module';
 import envConfig from './config/env.config';
 import { DatabaseModule } from './database/database.module';
+import { DriverHttpModule } from './drivers/driver-http.module';
 
 @Module({
   imports: [
@@ -17,7 +18,8 @@ import { DatabaseModule } from './database/database.module';
     UserHttpModule,
     BusHttpModule,
     TripHttpModule,
-    BookingHttpModule
+    BookingHttpModule,
+    DriverHttpModule
   ],
 })
 

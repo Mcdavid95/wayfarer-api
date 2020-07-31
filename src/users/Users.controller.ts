@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { Controller, Request, Post, Body, UseFilters, UseGuards } from '@nestjs/common';
-import { CreateUserDto } from './dtos/users.dto';
+import { CreateUserDto, LoginUserDto } from './dtos/users.dto';
 import { UserResponse, LoginResponse } from '../interfaces/response';
 import { AuthService } from '../auth/Auth.service';
 import { UsersService } from './Users.service';
 import { HttpExceptionFilter, Exception } from '../utils/errorResponse';
 import { AuthGuard } from '@nestjs/passport';
+import { Op } from 'sequelize';
 
 @Controller()
 @UseFilters(new HttpExceptionFilter())
@@ -23,16 +24,17 @@ export class UserController {
   ): Promise<UserResponse> {
     try {
       const options = {
-        where: { email },
+        where: {
+          [Op.or]: [ { email }, { phone } ]
+        }
       };
       const userExist = await this.usersService.findOne(options);
       if (userExist) {
-        console.log(userExist)
         return new Promise((resolve, reject) => {
           reject(
             new Exception({
               status: 'CONFLICT',
-              message: 'Email already in Use',
+              message: 'Email or Phone already in Use',
             }),
           );
         });

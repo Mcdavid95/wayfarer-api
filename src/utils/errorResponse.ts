@@ -23,17 +23,14 @@ export class HttpExceptionFilter implements ExceptionFilter {
   catch(exception: HttpException, host: ArgumentsHost): void {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
-    const request = ctx.getRequest<Request>();
     const status = exception.getStatus();
-    const message = exception.message
+    console.log(exception, 'exception');
+    console.log(exception.message, 'message');
+    
 
     response
       .status(status)
-      .send({
-        statusCode: status,
-        message,
-        path: request.url,
-      });
+      .send(exception.getResponse());
   }
 }
 

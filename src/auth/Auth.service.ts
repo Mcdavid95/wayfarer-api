@@ -30,11 +30,11 @@ export class AuthService {
     return bcrypt.compareSync(password, hash);
   } 
 
-  async validateUser(email: string, pass: string): Promise<any> {
+  async validateUser(phone: string, pass: string): Promise<any> {
       return new Promise( async (resolve, reject) =>{
         try {
           const options = {
-            where: { email },
+            where: { phone },
           };
           const user = await this.usersService.findOne(options);
           if (user && this.isPassword( pass, user.password )) {
