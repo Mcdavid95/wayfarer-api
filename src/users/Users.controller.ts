@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import { Controller, Request, Post, Body, UseFilters, UseGuards } from '@nestjs/common';
-import { CreateUserDto, LoginUserDto } from './dtos/users.dto';
+import { Controller, Request, Post, Body, UseFilters, UseGuards, Get } from '@nestjs/common';
+import { CreateUserDto } from './dtos/users.dto';
 import { UserResponse, LoginResponse } from '../interfaces/response';
 import { AuthService } from '../auth/Auth.service';
 import { UsersService } from './Users.service';
 import { HttpExceptionFilter, Exception } from '../utils/errorResponse';
 import { AuthGuard } from '@nestjs/passport';
 import { Op } from 'sequelize';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller()
 @UseFilters(new HttpExceptionFilter())
@@ -47,9 +48,11 @@ export class UserController {
         phone,
       });
 
+      delete user.password;
+
       return {
         success: true,
-        data: user,
+        data: user
       };
     } catch (error) {
       return error;
@@ -64,6 +67,18 @@ export class UserController {
       return {
         success: true,
         data: jwtObject
+      };
+    } catch (error) {return error}
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('users/me')
+  async me(@Request() req): Promise<UserResponse> {
+    try {
+      const user = await this.usersService.findById(req.user.id);
+      return {
+        success: true,
+        data: user
       };
     } catch (error) {return error}
   }

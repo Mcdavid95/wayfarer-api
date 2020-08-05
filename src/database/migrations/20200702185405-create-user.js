@@ -25,6 +25,11 @@ module.exports = {
                 defaultValue: false
             },
 
+            roles: {
+                type: Sequelize.ARRAY(Sequelize.STRING),
+                defaultValue: []
+            },
+
             user_type: {
                 type: Sequelize.ENUM({
                     values: ['PASSENGER', 'DRIVER', 'ORGANIZATION']

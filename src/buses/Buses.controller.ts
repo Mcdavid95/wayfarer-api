@@ -14,9 +14,11 @@ import { CreateBusesDto } from './dtos/buses.dto';
 import { handleException, HttpExceptionFilter } from '../utils/errorResponse';
 import { BusResponse, BusesResponse } from '../interfaces/response';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { DriversGuard } from '../common/guards/driverRole.guard';
+import { RolesGuard } from '../common/guards/role.guard';
+import { Roles } from '../common/decorators/roles.decorator';
 
-@Controller()
+@Controller('buses')
+@UseGuards(JwtAuthGuard, RolesGuard)
 @UseFilters(new HttpExceptionFilter())
 export class BusController {
   constructor(private readonly busService: BusesService) {}
@@ -25,8 +27,8 @@ export class BusController {
    * @method create
    *
    */
-  @UseGuards(JwtAuthGuard, DriversGuard)
-  @Post('buses')
+  @Post()
+  @Roles('DRIVER')
   async create(
     @Request() req,
     @Body()
@@ -57,8 +59,7 @@ export class BusController {
     }
   }
 
-  @UseGuards(JwtAuthGuard, DriversGuard)
-  @Get('buses/:id')
+  @Get(':id')
   async getBus(@Param() params: { id: number }): Promise<BusResponse | any> {
     try {
       const bus = await this.busService.findById(params.id);
@@ -74,8 +75,7 @@ export class BusController {
     }
   }
 
-  @UseGuards(JwtAuthGuard)
-  @Get('buses')
+  @Get()
   async getBuses(): Promise<BusesResponse> {
     try {
       const buses = await this.busService.findAll({});

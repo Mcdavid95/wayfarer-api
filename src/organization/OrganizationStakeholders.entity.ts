@@ -15,6 +15,6 @@ export class Organizations extends Model<Organizations> {
   @Column
   organization_id: number;
 
-  @Column(DataType.ENUM('DRIVER, TICKETER, OWNER'))
+  @Column(DataType.STRING)
   role: string;
 }

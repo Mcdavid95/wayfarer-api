@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
@@ -33,14 +34,14 @@ export class UsersService {
    * @param {number} id user id from user table
    */
   findById(id: number): Promise<Users> {
-    return this.userModel.findByPk(id);
+    return this.userModel.findByPk(id, { attributes: { exclude: ['password'] } });
   }
 
   /**
    * @method findOne
    * @param {number} id user id from user table
    */
-  findOne(options: unknown): Promise<Users> {
+  findOne(options: any): Promise<Users> {
     return this.userModel.findOne(options);
   }
 

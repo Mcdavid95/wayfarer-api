@@ -49,7 +49,7 @@ export class DriversService {
    * @param {number} id Drivers id from Drivers table
    */
   async remove(id: number): Promise<void> {
-    const Drivers = await this.findOne(id);
-    await Drivers.destroy();
+    const driver = await this.findOne(id);
+    await driver.destroy();
   }
 }

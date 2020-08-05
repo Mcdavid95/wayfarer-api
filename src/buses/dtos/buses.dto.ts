@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, IsNumberString, IsNumber, IsOptional } from "class-validator";
+import { IsNotEmpty, IsString, IsNumberString, IsOptional } from "class-validator";
 import { ApiProperty, ApiHideProperty } from "@nestjs/swagger";
 
 export class CreateBusesDto {

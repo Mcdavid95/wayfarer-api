@@ -13,18 +13,22 @@ import { CreateDriversDto } from './dtos/drivers.dto';
 import { handleException } from '../utils/errorResponse';
 import { DriverResponse, DriversResponse } from '../interfaces/response';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { DriversGuard } from 'src/common/guards/driverRole.guard';
+import { RolesGuard } from '../common/guards/role.guard';
+import { UsersService } from '../users/Users.service';
 
-@Controller()
+@Controller('drivers')
+@UseGuards(JwtAuthGuard, RolesGuard)
 export class DriverController {
-  constructor(private readonly driverService: DriversService) {}
+  constructor(
+    private readonly driverService: DriversService,
+    private readonly userService: UsersService
+  ) {}
 
   /**
    * @method create
    *
    */
-  @UseGuards(JwtAuthGuard)
-  @Post('drivers')
+  @Post()
   async create(
     @Request() req,
     @Body()
@@ -42,6 +46,9 @@ export class DriverController {
         user_id: user_id || req.user.id,
         credentials,
       });
+      const user = await this.userService.findById(user_id || req.user.id);
+      user.roles = [...new Set([...user.roles, 'DRIVER'])]
+      await user.save()
       return {
         success: true,
         data: driver,
@@ -50,9 +57,7 @@ export class DriverController {
       return error;
     }
   }
-
-  @UseGuards(JwtAuthGuard, DriversGuard)
-  @Get('drivers/:id')
+  @Get(':id')
   async getDriver(@Param() params: { id: number }): Promise<DriverResponse | any> {
     try {
       const driver = await this.driverService.findById(params.id);
@@ -67,9 +72,7 @@ export class DriverController {
       return error;
     }
   }
-
-  @UseGuards(JwtAuthGuard, DriversGuard)
-  @Get('drivers')
+  @Get()
   async getDrivers(): Promise<DriversResponse> {
     try {
       const drivers = await this.driverService.findAll({});
