@@ -3,6 +3,7 @@ import { GetBus } from "../buses/bus.interface";
 import { GetTrip } from "../trips/trip.interface";
 import { GetBooking } from "../bookings/bookings.interface";
 import { GetRoute } from "src/routes/route.interface";
+import { GetDriver } from "src/drivers/driver.interface";
 
 export interface UserResponse {
   success: boolean,
@@ -53,4 +54,13 @@ export interface RouteResponse {
 export interface RoutesResponse {
   success: boolean,
   data: GetRoute[]
+}
+
+export interface DriverResponse {
+  success: boolean,
+  data: GetDriver
+}
+export interface DriversResponse {
+  success: boolean,
+  data: GetDriver[]
 }

@@ -30,11 +30,11 @@ export class AuthService {
     return bcrypt.compareSync(password, hash);
   } 
 
-  async validateUser(email: string, pass: string): Promise<any> {
+  async validateUser(phone: string, pass: string): Promise<any> {
       return new Promise( async (resolve, reject) =>{
         try {
           const options = {
-            where: { email },
+            where: { phone },
           };
           const user = await this.usersService.findOne(options);
           if (user && this.isPassword( pass, user.password )) {
@@ -54,7 +54,7 @@ export class AuthService {
 
 
   async getToken(user: JwtPayload): Promise<JwtObject> {
-    const payload = { email: user.email, sub: user.id };
+    const payload = { email: user.email, sub: user.id, roles: user.roles };
     const token = this.jwtService.sign(payload);
     return { user, token }
   }

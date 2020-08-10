@@ -49,8 +49,8 @@ export class RoutesService {
    * @param {number} id Routes id from Routes table
    */
   async remove(id: number): Promise<void> {
-    const Routes = await this.findOne(id);
-    await Routes.destroy();
+    const route = await this.findOne(id);
+    await route.destroy();
   }
 
   // async update(updateObject: any, options: any): Promise<Routes> {

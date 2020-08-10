@@ -1,6 +1,7 @@
 export interface JwtPayload {
   email: string,
-  id: number
+  id: number,
+  roles: string[]
 }
 
 export interface JwtObject {

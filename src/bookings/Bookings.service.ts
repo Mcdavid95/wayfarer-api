@@ -70,8 +70,8 @@ export class BookingsService {
    * @param {number} id Bookings id from Bookings table
    */
   async remove(id: number): Promise<void> {
-    const Bookings = await this.findOne(id);
-    await Bookings.destroy();
+    const booking = await this.findOne(id);
+    await booking.destroy();
   }
 
 //   /**

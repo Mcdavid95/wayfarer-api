@@ -30,7 +30,7 @@ describe('UserController', () => {
       email: 'yuil@gmail.com',
       first_name: 'Mcdavid',
       last_name: 'Eme',
-      phone: '09036792739'
+      phone: '09036792739',
     }
   }
 
@@ -71,7 +71,7 @@ describe('UserController', () => {
     it('should register a new user', async () => {
       const response = await usersController.register(userResult)
       jest.spyOn(mockAuthService, 'signUpUser').mockImplementation(async() => userResult)
-      expect(response).toStrictEqual(result);
+      expect(response).toEqual(result);
     })
   })
 
