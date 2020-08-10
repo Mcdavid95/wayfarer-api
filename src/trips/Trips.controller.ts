@@ -6,10 +6,13 @@ import {
   Param,
   Get,
   UseGuards,
+  HttpException,
+  NotFoundException,
+  ConflictException,
+  InternalServerErrorException,
 } from '@nestjs/common';
 import { TripsService } from './Trips.service';
 import { CreateTripsDto } from './dtos/trips.dto';
-import { handleException } from '../utils/errorResponse';
 import { TripResponse, TripsResponse } from '../interfaces/response';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { BusesService } from '../buses/Buses.service';
@@ -28,18 +31,18 @@ export class TripController {
     @Request()
     @Body()
     { bus_id, trip_date, fare, route_id }: CreateTripsDto,
-  ): Promise<TripResponse | any> {
+  ): Promise<TripResponse | HttpException> {
     try {
       const busExists = await this.busService.findById(bus_id);
       if (!busExists) {
-        return handleException('NOT_FOUND', `Bus with bus_id: ${bus_id} does not exist`)
+        return new NotFoundException(`Bus with bus_id: ${bus_id} does not exist`)
       }
       const options = {
         where: { bus_id, trip_date },
       };
       const tripExist = await this.tripService.findOne(options);
       if (tripExist) {
-        return handleException('CONFLICT', 'Trip with the same bus_id and time already exist');
+        return new ConflictException('Trip with the same bus_id and time already exist');
       }
       const trip = await this.tripService.create({
         bus_id,
@@ -52,30 +55,30 @@ export class TripController {
         data: trip,
       };
     } catch (error) {
-      return error;
+      return new InternalServerErrorException();
     }
   }
 
   @UseGuards(JwtAuthGuard)
   @Get('trips/:id')
-  async getTrip(@Param() params: { id: number }): Promise<TripResponse | any> {
+  async getTrip(@Param() params: { id: number }): Promise<TripResponse | HttpException> {
     try {
       const trip = await this.tripService.findById(params.id);
       if (!trip) {
-        return handleException('NOT_FOUND', 'Trip not found');
+        return new NotFoundException('Trip not found');
       }
       return {
         success: true,
         data: trip,
       };
     } catch (error) {
-      return error;
+      return new InternalServerErrorException();
     }
   }
 
   @UseGuards(JwtAuthGuard)
   @Get('trips')
-  async getTrips(): Promise<TripsResponse> {
+  async getTrips(): Promise<TripsResponse | HttpException> {
     try {
       const trips = await this.tripService.findAll({});
       return {
@@ -83,7 +86,7 @@ export class TripController {
         data: trips,
       };
     } catch (error) {
-      return error;
+      return new InternalServerErrorException();
     }
   }
 }

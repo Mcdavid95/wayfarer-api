@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import { Controller, Request, Post, Body, UseFilters, UseGuards, Get } from '@nestjs/common';
+import { Controller, Request, Post, Body, UseFilters, UseGuards, Get, ConflictException, HttpException, InternalServerErrorException } from '@nestjs/common';
 import { CreateUserDto } from './dtos/users.dto';
 import { UserResponse, LoginResponse } from '../interfaces/response';
 import { AuthService } from '../auth/Auth.service';
 import { UsersService } from './Users.service';
-import { HttpExceptionFilter, Exception } from '../utils/errorResponse';
+import { HttpExceptionFilter } from '../utils/errorResponse';
 import { AuthGuard } from '@nestjs/passport';
 import { Op } from 'sequelize';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
@@ -22,7 +22,7 @@ export class UserController {
     @Request()
     @Body()
     { email, first_name, last_name, password, phone }: CreateUserDto,
-  ): Promise<UserResponse> {
+  ): Promise<UserResponse | HttpException> {
     try {
       const options = {
         where: {
@@ -31,14 +31,7 @@ export class UserController {
       };
       const userExist = await this.usersService.findOne(options);
       if (userExist) {
-        return new Promise((resolve, reject) => {
-          reject(
-            new Exception({
-              status: 'CONFLICT',
-              message: 'Email or Phone already in Use',
-            }),
-          );
-        });
+          return new ConflictException('Email or Phone already in Use');
       }
       const user = await this.authService.signUpUser({
         email,
@@ -55,31 +48,35 @@ export class UserController {
         data: user
       };
     } catch (error) {
-      return error;
+      return new InternalServerErrorException()
     }
   }
 
   @UseGuards(AuthGuard('local'))
   @Post('auth/login')
-  async login(@Request() req): Promise<LoginResponse> {
+  async login(@Request() req): Promise<LoginResponse | HttpException> {
     try {
       const jwtObject = await this.authService.getToken(req.user);
       return {
         success: true,
         data: jwtObject
       };
-    } catch (error) {return error}
+    } catch (error) {
+      return new InternalServerErrorException()
+    }
   }
 
   @UseGuards(JwtAuthGuard)
   @Get('users/me')
-  async me(@Request() req): Promise<UserResponse> {
+  async me(@Request() req): Promise<UserResponse | HttpException> {
     try {
       const user = await this.usersService.findById(req.user.id);
       return {
         success: true,
         data: user
       };
-    } catch (error) {return error}
+    } catch (error) {
+      return new InternalServerErrorException()
+    }
   }
 }

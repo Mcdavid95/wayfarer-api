@@ -7,10 +7,12 @@ import {
   Param,
   Get,
   UseGuards,
+  InternalServerErrorException,
+  NotFoundException,
+  HttpException,
 } from '@nestjs/common';
 import { BookingsService } from './Bookings.service';
 import { CreateBookingsDto } from './dtos/bookings.dto';
-import { handleException } from '../utils/errorResponse';
 import { BookingResponse, BookingsResponse } from '../interfaces/response';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { TripsService } from '../trips/Trips.service';
@@ -36,8 +38,7 @@ export class BookingController {
     try {
       const tripExists = await this.tripService.findById(trip_id);
       if (!tripExists) {
-        return handleException(
-          'NOT_FOUND',
+        return new NotFoundException(
           `Trip with trip_id: ${trip_id} does not exist`,
         );
       }
@@ -60,7 +61,7 @@ export class BookingController {
         data: booking,
       };
     } catch (error) {
-      return error;
+      return new InternalServerErrorException('Internal Server Error');
     }
   }
 
@@ -68,24 +69,24 @@ export class BookingController {
   @Get('bookings/:id')
   async getBooking(
     @Param() params: { id: number },
-  ): Promise<BookingResponse | any> {
+  ): Promise<BookingResponse | HttpException> {
     try {
       const booking = await this.bookingService.findById(params.id);
       if (!booking) {
-        return handleException('NOT_FOUND', 'Booking not found');
+        return new NotFoundException('Booking not found');
       }
       return {
         success: true,
         data: booking,
       };
     } catch (error) {
-      return error;
+      return new InternalServerErrorException('Internal Server Error');
     }
   }
 
   @UseGuards(JwtAuthGuard)
   @Get('bookings')
-  async getBookings(): Promise<BookingsResponse> {
+  async getBookings(): Promise<BookingsResponse | HttpException> {
     try {
       const bookings = await this.bookingService.findAll({});
       return {
@@ -93,7 +94,7 @@ export class BookingController {
         data: bookings,
       };
     } catch (error) {
-      return error;
+      return new InternalServerErrorException('Internal Server Error');
     }
   }
 }

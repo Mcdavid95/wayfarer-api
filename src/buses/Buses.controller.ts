@@ -8,10 +8,14 @@ import {
   Get,
   UseGuards,
   UseFilters,
+  ConflictException,
+  HttpException,
+  InternalServerErrorException,
+  NotFoundException,
 } from '@nestjs/common';
 import { BusesService } from './Buses.service';
 import { CreateBusesDto } from './dtos/buses.dto';
-import { handleException, HttpExceptionFilter } from '../utils/errorResponse';
+import { HttpExceptionFilter } from '../utils/errorResponse';
 import { BusResponse, BusesResponse } from '../interfaces/response';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { RolesGuard } from '../common/guards/role.guard';
@@ -33,14 +37,14 @@ export class BusController {
     @Request() req,
     @Body()
     { number_plate, manufacturer, year, model, capacity }: CreateBusesDto,
-  ): Promise<BusResponse | any> {
+  ): Promise<BusResponse | HttpException> {
     try {
       const options = {
         where: { number_plate },
       };
       const busExist = await this.busService.findOne(options);
       if (busExist) {
-        return handleException('CONFLICT', 'Bus with the same number_plate already exist');
+        return new ConflictException('Bus with the same number_plate already exist');
       }
       const bus = await this.busService.create({
         owner_id: req.user.id,
@@ -55,28 +59,28 @@ export class BusController {
         data: bus,
       };
     } catch (error) {
-      return error;
+      return new InternalServerErrorException();
     }
   }
 
   @Get(':id')
-  async getBus(@Param() params: { id: number }): Promise<BusResponse | any> {
+  async getBus(@Param() params: { id: number }): Promise<BusResponse | HttpException> {
     try {
       const bus = await this.busService.findById(params.id);
       if (!bus) {
-        return handleException('NOT_FOUND', 'Bus not found');
+        return new NotFoundException('Bus not found');
       }
       return {
         success: true,
         data: bus,
       };
     } catch (error) {
-      return error;
+      return new InternalServerErrorException();
     }
   }
 
   @Get()
-  async getBuses(): Promise<BusesResponse> {
+  async getBuses(): Promise<BusesResponse | HttpException> {
     try {
       const buses = await this.busService.findAll({});
       return {
@@ -84,7 +88,7 @@ export class BusController {
         data: buses,
       };
     } catch (error) {
-      return error;
+      return new InternalServerErrorException();
     }
   }
 }

@@ -12,7 +12,7 @@ export class CreateBookingsDto {
 
   @IsNotEmpty()
   @IsNumber()
-  @ApiProperty()
+  
   seat_number: number;
 }
 

@@ -5,12 +5,12 @@ export class CreateRoutesDto {
 
   @IsNotEmpty()
   @IsString()
-  @ApiProperty()
+  
   origin: string;
 
   @IsNotEmpty()
   @IsString()
-  @ApiProperty()
+  
   destination: string;
 }
 

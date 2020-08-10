@@ -7,10 +7,13 @@ import {
   Param,
   Get,
   UseGuards,
+  HttpException,
+  ConflictException,
+  InternalServerErrorException,
+  NotFoundException,
 } from '@nestjs/common';
 import { DriversService } from './Drivers.service';
 import { CreateDriversDto } from './dtos/drivers.dto';
-import { handleException } from '../utils/errorResponse';
 import { DriverResponse, DriversResponse } from '../interfaces/response';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { RolesGuard } from '../common/guards/role.guard';
@@ -33,14 +36,14 @@ export class DriverController {
     @Request() req,
     @Body()
     { user_id, credentials }: CreateDriversDto,
-  ): Promise<DriverResponse | any> {
+  ): Promise<DriverResponse | HttpException> {
     try {
       const options = {
         where: { user_id: user_id || req.user.id },
       };
       const driverExist = await this.driverService.findOne(options);
       if (driverExist) {
-        return handleException('CONFLICT', 'Driver already exists');
+        return new ConflictException('Driver already exists');
       }
       const driver = await this.driverService.create({
         user_id: user_id || req.user.id,
@@ -54,26 +57,26 @@ export class DriverController {
         data: driver,
       };
     } catch (error) {
-      return error;
+      return new InternalServerErrorException();
     }
   }
   @Get(':id')
-  async getDriver(@Param() params: { id: number }): Promise<DriverResponse | any> {
+  async getDriver(@Param() params: { id: number }): Promise<DriverResponse | HttpException> {
     try {
       const driver = await this.driverService.findById(params.id);
       if (!driver) {
-        return handleException('NOT_FOUND', 'Driver not found');
+        return new NotFoundException('Driver not found');
       }
       return {
         success: true,
         data: driver,
       };
     } catch (error) {
-      return error;
+      return new InternalServerErrorException();
     }
   }
   @Get()
-  async getDrivers(): Promise<DriversResponse> {
+  async getDrivers(): Promise<DriversResponse | HttpException> {
     try {
       const drivers = await this.driverService.findAll({});
       return {
@@ -81,7 +84,7 @@ export class DriverController {
         data: drivers,
       };
     } catch (error) {
-      return error;
+      return new InternalServerErrorException();
     }
   }
 }

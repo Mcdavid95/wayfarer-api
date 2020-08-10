@@ -5,27 +5,27 @@ export class CreateBusesDto {
 
   @IsNotEmpty()
   @IsString()
-  @ApiProperty()
+  
   number_plate: string;
 
   @IsNotEmpty()
   @IsString()
-  @ApiProperty()
+  
   manufacturer: string;
 
   @IsNotEmpty()
   @IsString()
-  @ApiProperty()
+  
   model: string;
 
   @IsNotEmpty()
   @IsNumberString()
-  @ApiProperty()
+  
   year: string;
 
   @IsNotEmpty()
   // @IsNumber()
-  @ApiProperty()
+  
   capacity: number;
 
   @IsNotEmpty()

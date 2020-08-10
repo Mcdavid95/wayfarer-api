@@ -5,21 +5,21 @@ export class CreateTripsDto {
 
   @IsNotEmpty()
   @IsNumber()
-  @ApiProperty()
+  
   bus_id: number;
 
   @IsNotEmpty()
   @IsNumber()
-  @ApiProperty()
+  
   route_id: number;
 
   @IsNotEmpty()
   @IsDateString()
-  @ApiProperty()
+  
   trip_date: string;
 
   @IsNotEmpty()
-  @ApiProperty()
+  
   @IsNumberString()
   fare: number;
 }
