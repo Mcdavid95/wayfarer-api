@@ -22,7 +22,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
-    "@nestjs/cli": "^7.2.0",
+    "@nestjs/cli": "^9.2.0",
     "@nestjs/common": "^7.1.1",
     "@nestjs/config": "^0.5.0",
     "@nestjs/core": "^7.1.1",
@@ -49,7 +49,7 @@
   },
   "devDependencies": {
     "@compodoc/compodoc": "^1.1.11",
-    "@nestjs/cli": "^7.2.0",
+    "@nestjs/cli": "^9.2.0",
     "@nestjs/schematics": "^7.0.0",
     "@nestjs/testing": "^7.1.1",
     "@types/bcrypt": "^3.0.0",
